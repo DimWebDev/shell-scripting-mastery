@@ -6,6 +6,13 @@
 [![Units](https://img.shields.io/badge/units-10-blue.svg)](#course-structure)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
+---
+
+🚀 **View the Course Online:**
+**[Shell Scripting Mastery — Live GitHub Page](https://dimwebdev.github.io/shell-scripting-mastery/)**
+
+---
+
 ## About This Course
 
 This is a complete, production-ready course designed to take you from command-line beginner to advanced shell scripting practitioner. Every unit includes detailed explanations, commented code examples, real-world scenarios, and hands-on exercises.

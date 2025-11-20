@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO & Social Meta Tags -->
+    <title>Shell Scripting Master Class | Control Your Machine, Command AI, Unlock Superpowers</title>
+    <meta name="description" content="Master shell scripting to control your computer and orchestrate AI agents. Learn the language of machines and unlock computational superpowers that most people don't know exist.">
+    <meta property="og:title" content="Shell Scripting Master Class | Your Gateway to Computational Superpowers">
+    <meta property="og:description" content="Direct control over machines + AI intelligence = Unstoppable automation. Master Bash/Zsh and command the future of computing.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#0a021a">
+    
+    <!-- Favicon (SVG Data URI) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>_></text></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0a021a', // Deep Ominous Purple Background
+                            accent: '#00ff41', // Toxic Green Accent
+                            purple: '#5E2750', // Rich Retro Ubuntu Purple
+                            terminal: '#300a24', // Ubuntu Terminal Purple Background
+                            'ubuntu-orange': '#dd4814',
+                        }
+                    },
+                    animation: {
+                        'cursor-blink': 'blink 1s step-end infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blink: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a021a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #300a24;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5E2750;
+        }
+        
+        /* Cyber Grid Background Pattern */
+        .bg-grid-pattern {
+            background-image: linear-gradient(to right, rgba(94, 39, 80, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(94, 39, 80, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+
+        /* Tooltip Styles */
+        .tooltip-trigger:hover .tooltip-content {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-gray-300 font-sans antialiased selection:bg-brand-accent selection:text-brand-dark relative">
+
+    <!-- Background Texture -->
+    <div class="absolute inset-0 bg-grid-pattern pointer-events-none z-0 h-screen"></div>
+
+    <!-- Navbar -->
+    <nav class="w-full border-b border-brand-purple/30 bg-brand-dark/90 backdrop-blur fixed top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="text-brand-accent font-mono text-2xl sm:text-3xl font-bold tracking-tight hover:text-white transition-colors cursor-default">./shell-scripting_mastery.sh</span>
+            </div>
+            <a href="https://github.com/your-repo" target="_blank" class="flex items-center gap-2 text-sm font-medium hover:text-brand-accent transition-colors group">
+                <svg class="w-5 h-5 group-hover:rotate-12 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
+                GitHub Repo
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            
+            <!-- Hero Text -->
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-xs font-mono font-semibold uppercase tracking-wider">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-accent"></span>
+                    </span>
+                    Agentic AI Ready
+                </div>
+                
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
+                    Master the <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-brand-ubuntu-orange">Language That Controls Machines</span>
+                </h1>
+
+                <p class="text-lg text-gray-400 max-w-xl leading-relaxed">
+                    Shell scripting is direct control over your computer—every file, process, and system resource bends to your command. Now combine this power with AI agents, and you unlock a superpower: the ability to orchestrate intelligent systems that execute your vision at machine speed. You become the architect of automation.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://github.com/your-repo" class="px-8 py-3 bg-brand-accent text-brand-dark font-bold rounded-lg hover:bg-brand-accent/90 transition-all transform hover:-translate-y-1 flex items-center gap-2 shadow-[0_0_20px_rgba(0,255,65,0.3)] hover:shadow-[0_0_30px_rgba(0,255,65,0.5)]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                        View Curriculum on GitHub
+                    </a>
+                </div>
+            </div>
+
+            <!-- Terminal Component -->
+            <div id="terminal-demo" class="relative group animate-float">
+                <!-- Glow Effect -->
+                <div class="absolute -inset-1 bg-gradient-to-r from-brand-accent to-brand-purple rounded-xl blur opacity-30 group-hover:opacity-60 transition duration-1000"></div>
+                
+                <div class="relative rounded-xl bg-brand-terminal border border-brand-purple/50 shadow-2xl overflow-hidden font-mono text-sm">
+                    <!-- Terminal Header -->
+                    <div class="bg-brand-terminal border-b border-brand-purple/50 px-4 py-3 flex items-center justify-between">
+                        <div class="flex gap-2">
+                            <div class="w-3 h-3 rounded-full bg-brand-ubuntu-orange"></div>
+                            <div class="w-3 h-3 rounded-full bg-gray-400"></div>
+                            <div class="w-3 h-3 rounded-full bg-gray-400"></div>
+                        </div>
+                        <div class="text-gray-400 text-xs">user@ubuntu: ~/agents</div>
+                    </div>
+                    
+                    <!-- Terminal Body -->
+                    <div class="p-6 min-h-[320px] text-gray-200 space-y-2 font-bold" id="terminal-content">
+                        <!-- Content injected via JS -->
+                        <div class="opacity-0" id="typewriter-target"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Shell Manifesto Section (New Second Terminal) -->
+    <section class="py-16 bg-[#05010d] border-b border-brand-purple/20 relative z-10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative group">
+                <!-- Glow Effect -->
+                <div class="absolute -inset-1 bg-gradient-to-r from-brand-ubuntu-orange to-brand-purple rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                
+                <div class="relative rounded-xl bg-[#0c0c0c] border border-brand-purple/30 shadow-2xl overflow-hidden font-mono text-sm">
+                    <!-- Terminal Header -->
+                    <div class="bg-[#1a1a1a] border-b border-gray-800 px-4 py-2 flex items-center justify-between relative z-30">
+                        <div class="flex items-center gap-4">
+                            <div class="flex gap-1.5">
+                                <div class="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-green-500/80"></div>
+                            </div>
+                            <div class="text-gray-500 text-xs flex items-center gap-2">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                <span>manifesto.sh</span>
+                            </div>
+                        </div>
+                        <div class="text-gray-600 text-xs">bash — 80x24</div>
+                    </div>
+                    
+                    <!-- Terminal Body -->
+                    <div class="p-6 md:p-8 text-gray-300 font-medium leading-relaxed min-h-[400px] relative" id="manifesto-terminal">
+                        
+                        <!-- Big Run Button Overlay -->
+                        <div id="run-button-overlay" class="absolute inset-0 flex items-center justify-center z-20 bg-black/80 backdrop-blur-[1px]">
+                            <button onclick="runManifesto()" class="group relative px-8 py-4 bg-brand-accent/10 border border-brand-accent text-brand-accent font-mono font-bold text-lg rounded-lg hover:bg-brand-accent hover:text-brand-dark transition-all duration-300 shadow-[0_0_30px_rgba(0,255,65,0.2)] hover:shadow-[0_0_50px_rgba(0,255,65,0.6)] active:scale-95">
+                                <span class="mr-2 animate-pulse">></span> CLICK TO EXECUTE SCRIPT
+                                <div class="absolute inset-0 rounded-lg ring-1 ring-white/10 group-hover:ring-transparent"></div>
+                            </button>
+                        </div>
+
+                        <!-- Command Line (Initially Hidden) -->
+                        <div id="manifesto-command-line" class="mb-4 text-brand-accent hidden">
+                            <span class="text-brand-ubuntu-orange">root@system:~$</span> ./print_manifesto.sh --stream
+                        </div>
+
+                        <!-- Content Area -->
+                        <div id="manifesto-content" class="whitespace-pre-wrap"></div>
+                        <span class="inline-block w-2 h-4 bg-brand-accent ml-1 opacity-0" id="manifesto-cursor"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI & Shell Context Section -->
+    <section class="py-20 bg-brand-terminal/50 border-y border-brand-purple/30 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-white mb-4">Shell Scripting + AI = Superpowers</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    You control the machine. AI amplifies your commands. Together, you can automate anything—deploy systems, process terabytes of data, monitor infrastructure, or build self-healing pipelines. Master the shell, and you become unstoppable in the age of intelligent agents.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-brand-terminal/80 p-8 rounded-2xl border border-brand-purple/30 hover:border-brand-accent/50 transition-colors group">
+                    <div class="w-12 h-12 bg-brand-accent/10 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Speak the Machine's Language</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        The shell is how you communicate directly with your computer's core. Every keystroke is a command that the machine obeys instantly. Master this language, and you control everything—from files to networks to AI agents.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-brand-terminal/80 p-8 rounded-2xl border border-brand-purple/30 hover:border-brand-purple/50 transition-colors group">
+                    <div class="w-12 h-12 bg-brand-purple/20 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6 text-brand-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Be the Guardian of AI</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        AI can generate powerful code in seconds, but only you can ensure it's safe. Understanding the shell means you audit, sandbox, and control every AI-generated command. You're not just using AI—you're commanding it safely.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-brand-terminal/80 p-8 rounded-2xl border border-brand-purple/30 hover:border-brand-accent/50 transition-colors group">
+                    <div class="w-12 h-12 bg-brand-accent/10 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Build Self-Healing Systems</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Combine shell automation with AI intelligence to create systems that monitor themselves, detect problems, and fix issues automatically. One script can replace hours of manual work. Dozens of scripts can run an entire infrastructure.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum Overview -->
+    <section class="py-24 relative overflow-hidden bg-brand-dark">
+        <!-- Translucent Terminal Background -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0 select-none overflow-hidden">
+             <div class="w-[120%] h-[120%] bg-brand-terminal/20 absolute rotate-3 blur-3xl"></div>
+             <div class="relative w-[900px] h-[600px] bg-[#1a0b1c] border border-brand-purple/20 rounded-xl shadow-2xl opacity-10 transform -rotate-6 scale-110">
+                <div class="flex items-center gap-2 px-4 py-3 border-b border-brand-purple/20 bg-[#240e26]">
+                    <div class="w-3 h-3 rounded-full bg-brand-ubuntu-orange"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-600"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-600"></div>
+                </div>
+                <div class="p-6 font-mono text-brand-purple text-opacity-40 text-sm leading-loose">
+                    $ ./curriculum_load.sh --verbose<br>
+                    > Loading Module 01... OK<br>
+                    > Loading Module 02... OK<br>
+                    > Initializing regex engine... DONE<br>
+                    > Importing sysadmin tools... DONE<br>
+                    > Verifying security protocols... PASS<br>
+                    > Establishing link with AI Agent... CONNECTED<br>
+                    > _<br>
+                </div>
+             </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-white mb-4 font-mono"><span class="text-brand-accent">$</span> cat ./curriculum.md</h2>
+                <p class="text-gray-400 font-mono text-sm">
+                    # From zero to machine control in 10 units.<br>
+                    # Master the shell. Command AI. Become unstoppable.
+                </p>
+            </div>
+            
+            <div class="space-y-8 font-mono">
+                <!-- Phase 1 -->
+                <div class="relative group">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-brand-accent/20 to-transparent rounded-xl blur opacity-0 group-hover:opacity-100 transition duration-700"></div>
+                    <div class="relative bg-[#1a0b1c] border border-brand-purple/40 rounded-xl p-8 flex flex-col md:flex-row gap-8 items-start shadow-2xl">
+                        <div class="md:w-1/4 shrink-0 border-r border-brand-purple/20 pr-6">
+                            <span class="text-brand-accent text-xs font-bold tracking-[0.2em] uppercase mb-3 block opacity-70">Phase I</span>
+                            <h3 class="text-2xl font-bold text-white mb-2">Take Control</h3>
+                            <p class="text-xs text-gray-500 leading-relaxed">Master the fundamentals of machine communication and begin commanding your system.</p>
+                        </div>
+                        <div class="md:w-3/4 grid gap-8 sm:grid-cols-3">
+                            <!-- Unit 1 -->
+                            <div class="space-y-2">
+                                <div class="text-brand-accent text-xs mb-1">./unit_01</div>
+                                <h4 class="font-bold text-white text-sm">CLI Fundamentals</h4>
+                                <p class="text-xs text-gray-400 leading-relaxed">Terminal environment, file navigation (cd, ls), and permission bitmaps (chmod).</p>
+                            </div>
+                            <!-- Unit 2 -->
+                            <div class="space-y-2">
+                                <div class="text-brand-accent text-xs mb-1">./unit_02</div>
+                                <h4 class="font-bold text-white text-sm">Intro to Scripting</h4>
+                                <p class="text-xs text-gray-400 leading-relaxed">The Shebang, variable assignment, execution rights, and basic I/O.</p>
+                            </div>
+                            <!-- Unit 3 -->
+                            <div class="space-y-2">
+                                <div class="text-brand-accent text-xs mb-1">./unit_03</div>
+                                <h4 class="font-bold text-white text-sm">Control Structures</h4>
+                                <p class="text-xs text-gray-400 leading-relaxed">Conditional logic (if/else), test operators, and iterative loops (for/while).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="relative group">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-brand-purple/40 to-transparent rounded-xl blur opacity-0 group-hover:opacity-100 transition duration-700"></div>
+                    <div class="relative bg-[#1a0b1c] border border-brand-purple/40 rounded-xl p-8 flex flex-col md:flex-row gap-8 items-start shadow-2xl">
+                        <div class="md:w-1/4 shrink-0 border-r border-brand-purple/20 pr-6">
+                            <span class="text-brand-purple text-xs font-bold tracking-[0.2em] uppercase mb-3 block opacity-70">Phase II</span>
+                            <h3 class="text-2xl font-bold text-white mb-2">Amplify Your Power</h3>
+                            <p class="text-xs text-gray-500 leading-relaxed">Build sophisticated automation, process massive data streams, and create reusable intelligence.</p>
+                        </div>
+                        <div class="md:w-3/4 grid gap-8 sm:grid-cols-2">
+                            <!-- Units 4-5 -->
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="text-brand-purple text-xs mb-1">./unit_04</div>
+                                    <h4 class="font-bold text-white text-sm">Functions & Organization</h4>
+                                    <p class="text-xs text-gray-400 leading-relaxed">Local scope, arguments, return values, and modular script architecture.</p>
+                                </div>
+                                <div>
+                                    <div class="text-brand-purple text-xs mb-1">./unit_05</div>
+                                    <h4 class="font-bold text-white text-sm">I/O & Text Processing</h4>
+                                    <p class="text-xs text-gray-400 leading-relaxed">Redirection streams (> | 2>&1) and the power trio: grep, sed, awk.</p>
+                                </div>
+                            </div>
+                            <!-- Units 6-7 -->
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="text-brand-purple text-xs mb-1">./unit_06</div>
+                                    <h4 class="font-bold text-white text-sm">Strings & Regex</h4>
+                                    <p class="text-xs text-gray-400 leading-relaxed">String slicing, pattern matching, and regular expressions.</p>
+                                </div>
+                                <div>
+                                    <div class="text-brand-purple text-xs mb-1">./unit_07</div>
+                                    <h4 class="font-bold text-white text-sm">Advanced Topics</h4>
+                                    <p class="text-xs text-gray-400 leading-relaxed">Arrays, Dictionaries, Background Jobs (&), and Signal Traps.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="relative group">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-brand-ubuntu-orange/40 to-transparent rounded-xl blur opacity-0 group-hover:opacity-100 transition duration-700"></div>
+                    <div class="relative bg-[#1a0b1c] border border-brand-purple/40 rounded-xl p-8 flex flex-col md:flex-row gap-8 items-start shadow-2xl">
+                        <div class="md:w-1/4 shrink-0 border-r border-brand-purple/20 pr-6">
+                            <span class="text-brand-ubuntu-orange text-xs font-bold tracking-[0.2em] uppercase mb-3 block opacity-70">Phase III</span>
+                            <h3 class="text-2xl font-bold text-white mb-2">Command Everything</h3>
+                            <p class="text-xs text-gray-500 leading-relaxed">Deploy entire systems, orchestrate AI agents, and build automation that scales infinitely.</p>
+                        </div>
+                        <div class="md:w-3/4 grid gap-8 sm:grid-cols-3">
+                            <!-- Unit 8 -->
+                            <div class="space-y-2">
+                                <div class="text-brand-ubuntu-orange text-xs mb-1">./unit_08</div>
+                                <h4 class="font-bold text-white text-sm">Admin & Monitoring</h4>
+                                <p class="text-xs text-gray-400 leading-relaxed">Package managers (apt/brew), Cron scheduling, and resource monitoring (top/htop).</p>
+                            </div>
+                            <!-- Unit 9 -->
+                            <div class="space-y-2">
+                                <div class="text-brand-ubuntu-orange text-xs mb-1">./unit_09</div>
+                                <h4 class="font-bold text-white text-sm">Capstone Projects</h4>
+                                <p class="text-xs text-gray-400 leading-relaxed">Building the "Time Machine" Backup & "Detective" Log Analyzer.</p>
+                            </div>
+                            <!-- Unit 10 -->
+                            <div class="space-y-2">
+                                <div class="text-brand-ubuntu-orange text-xs mb-1">./unit_10</div>
+                                <h4 class="font-bold text-white text-sm">Best Practices</h4>
+                                <p class="text-xs text-gray-400 leading-relaxed">Google Style Guide, ShellCheck analysis, and security auditing.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / CTA -->
+    <footer class="border-t border-brand-purple/30 bg-brand-dark py-16 relative z-10">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <h2 class="text-3xl font-bold text-white mb-6">Ready to Unlock Your Superpowers?</h2>
+            <p class="text-gray-400 mb-8">
+                Take control of your machine. Command AI agents. Automate the impossible. The shell is your key to computational mastery—and this course will teach you everything you need to become unstoppable.
+            </p>
+            <a href="https://github.com/your-repo" class="inline-flex items-center gap-3 px-8 py-4 bg-brand-accent text-brand-dark font-bold text-lg rounded-lg hover:bg-brand-accent/80 transition-all shadow-lg shadow-brand-accent/20">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
+                Access Course Material
+            </a>
+            <div class="mt-12 text-gray-600 text-sm">
+                &copy; 2025 Shell Scripting Master Class. Empowering humans to control machines and command AI.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Terminal Script -->
+    <script>
+        // ... existing code for Terminal 1 ...
+        const lines = [
+            { type: 'input', text: 'chmod +x ./agent_monitor.sh' },
+            { type: 'output', text: '', delay: 500 }, 
+            { type: 'input', text: './agent_monitor.sh --audit --verbose' },
+            { type: 'output', text: '[INFO] Initializing Sandbox environment...', delay: 300 },
+            { type: 'output', text: '[INFO] Connecting to AI Model (Port 3000)... Connected.', delay: 600 },
+            { type: 'output', text: '[WARN] Agent attempted access to /etc/passwd. BLOCKED by script.', delay: 900, color: 'text-brand-ubuntu-orange' },
+            { type: 'output', text: '[INFO] Audit log generated: /var/log/agent_audit.log', delay: 1200 },
+            { type: 'output', text: '[SUCCESS] Workflow complete.', delay: 1500, color: 'text-brand-accent' },
+            { type: 'input', text: '' }
+        ];
+
+        const container = document.getElementById('terminal-content');
+        let lineIndex = 0;
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (lineIndex >= lines.length) {
+                setTimeout(() => {
+                    container.innerHTML = '';
+                    lineIndex = 0;
+                    typeWriter();
+                }, 5000);
+                return;
+            }
+
+            const currentLine = lines[lineIndex];
+            
+            if (charIndex === 0) {
+                const div = document.createElement('div');
+                div.className = "font-mono mb-1";
+                
+                if (currentLine.type === 'input') {
+                    div.innerHTML = `<span class="text-brand-accent mr-2 font-bold">user@ubuntu:~$</span><span class="typing-target"></span><span class="animate-cursor-blink border-r-2 border-gray-400 ml-1">&nbsp;</span>`;
+                } else {
+                    div.innerHTML = `<span class="${currentLine.color || 'text-gray-400'}">${currentLine.text}</span>`;
+                }
+                container.appendChild(div);
+                
+                if (currentLine.type === 'output') {
+                    setTimeout(() => {
+                        lineIndex++;
+                        charIndex = 0;
+                        typeWriter();
+                    }, currentLine.delay || 100);
+                    return;
+                }
+            }
+
+            if (currentLine.type === 'input') {
+                const target = container.lastElementChild.querySelector('.typing-target');
+                const cursor = container.lastElementChild.querySelector('.animate-cursor-blink');
+                
+                const prevCursors = container.querySelectorAll('.animate-cursor-blink');
+                prevCursors.forEach(c => {
+                    if(c !== cursor) c.style.display = 'none';
+                });
+
+                if (charIndex < currentLine.text.length) {
+                    target.textContent += currentLine.text.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeWriter, 50 + Math.random() * 50); 
+                } else {
+                    lineIndex++;
+                    charIndex = 0;
+                    setTimeout(typeWriter, 800); 
+                }
+            }
+        }
+
+        // --- NEW SCRIPT FOR THE MANIFESTO TERMINAL ---
+        const manifestoRawText = `Imagine having absolute control over your computer. Every file, every process, every system resource—all responding instantly to your commands. That's the power of shell scripting.
+
+Now imagine combining this raw machine control with the intelligence of AI. You're no longer just writing code—you're orchestrating autonomous agents that can analyze logs, deploy systems, heal broken services, and process data at scales that would take humans weeks. This is not science fiction. This is your reality when you master the shell.
+
+Shell scripting is the universal language of computers. It's how you tell machines exactly what to do. It's how you automate the boring, eliminate the repetitive, and scale the impossible. And in the age of AI agents—Claude Code, GitHub Copilot, Open Interpreter—the shell becomes even more powerful. Because now you can:
+
+Command AI agents to execute your workflows with surgical precision,
+Build self-healing systems that detect and fix problems automatically,
+Process terabytes of data with pipelines you design once and run forever,
+Audit and sandbox AI-generated code to ensure it's safe and correct,
+Deploy entire infrastructures with a single script.
+
+This is your superpower. The shell gives you control. AI gives you scale. Together, you become unstoppable.
+
+Don't just use computers. Control them. Don't just write code. Orchestrate intelligence. Master shell scripting, harness AI, and unlock capabilities most people don't even know exist.`;
+
+        const words = manifestoRawText.replace(/\n/g, " <br> ").split(" ");
+        const manifestoContainer = document.getElementById('manifesto-content');
+        let wordIndex = 0;
+
+        function runManifesto() {
+            // Hide button
+            const overlay = document.getElementById('run-button-overlay');
+            overlay.style.transition = 'opacity 0.5s ease';
+            overlay.style.opacity = '0';
+            setTimeout(() => overlay.style.display = 'none', 500);
+
+            // Show Command Line
+            document.getElementById('manifesto-command-line').classList.remove('hidden');
+            
+            // Show Cursor
+            document.getElementById('manifesto-cursor').classList.remove('opacity-0');
+            document.getElementById('manifesto-cursor').classList.add('animate-cursor-blink');
+
+            // Start Streaming after small delay
+            setTimeout(streamManifesto, 800);
+        }
+
+        function streamManifesto() {
+            if (wordIndex < words.length) {
+                let word = words[wordIndex];
+                
+                if (word === "<br>") {
+                     manifestoContainer.innerHTML += "<br>";
+                } else {
+                     manifestoContainer.innerHTML += word + " ";
+                }
+                
+                wordIndex++;
+                setTimeout(streamManifesto, 50); // Adjust speed here
+            } else {
+                document.getElementById('manifesto-cursor').classList.add('opacity-50');
+            }
+        }
+
+        window.onload = function() {
+            typeWriter(); // Start Terminal 1
+            // Terminal 2 waits for button click
+        };
+    </script>
+</body>
+</html>
